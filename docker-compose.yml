@@ -22,7 +22,7 @@ services:
       # - WATCHTOWER_LIFECYCLE_HOOKS=true # Add this
   reverse-proxy:
     image: traefik:v3.6
-    container_name: traefik
+    container_name: traefik-en
     restart: unless-stopped
     command:
       - "--log.level=DEBUG"
