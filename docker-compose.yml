@@ -62,7 +62,6 @@ services:
 
       # HTTP redirect router
       - "traefik.http.routers.error-narrator-http.middlewares=redirect-to-https"
-      - "traefik.http.routers.error-narrator.rule=Host(`errornarrator.michaelyze.com`)"
       - "traefik.http.routers.error-narrator-http.rule=Host(`errornarrator.michaelyze.com`)"
       - "traefik.http.routers.error-narrator-http.entrypoints=web"
 
@@ -72,11 +71,7 @@ services:
       # Middlewares
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
-
-      # Cache control - Better cache control - allow caching of static assets
-      # - "traefik.http.middlewares.cache-control.headers.customresponseheaders.Cache-Control=public, max-age=3600, stale-while-revalidate=86400"
-      # Add cache control headers to prevent stale client code (replaced by the above)
-      # - "traefik.http.middlewares.cache-control.headers.customresponseheaders.Cache-Control=no-cache, no-store, must-revalidate"
+      - "traefik.http.routers.error-narrator-http.tls=false"
 
       # Apply middlewares to HTTPS router
       - "traefik.http.routers.error-narrator.middlewares=cache-control"
