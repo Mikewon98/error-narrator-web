@@ -18,40 +18,11 @@ services:
       - REPO_PASS=${GITHUB_TOKEN}
       - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - WATCHTOWER_NOTIFICATION_URL=${DISCORD_WEBHOOK_URL}
-      # - WATCHTOWER_TIMEOUT=60s # Add this
-      # - WATCHTOWER_LIFECYCLE_HOOKS=true # Add this
-  reverse-proxy:
-    image: traefik:v3.6
-    container_name: traefik-en
-    restart: unless-stopped
-    command:
-      - "--log.level=DEBUG"
-      - "--providers.docker=true"
-      - "--api.insecure=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entryPoints.web.address=:80"
-      - "--entryPoints.websecure.address=:443"
-      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.myresolver.acme.email=mikewon98@gmail.com"
-      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-      - "--entryPoints.web.address=:80"
-      - "--entryPoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entryPoints.web.http.redirections.entrypoint.scheme=https"
-    ports:
-      # The http port
-      - "80:80"
-      # The https port
-      - "443:443"
-      # The web UI ((enabled by api.insecure=true)
-      # - "8080:8080"
-    volumes:
-      # So that Traefik can listen to docker events
-      - /var/run/docker.sock:/var/run/docker.sock
-      # Lets encrypt
-      - letsencrypt:/letsencrypt
   error-narrator:
     image: ghcr.io/mikewon98/error-narrator:stable
     restart: unless-stopped
+    networks:
+      - portfolio_default
     labels:
       - "traefik.enable=true"
 
@@ -86,5 +57,7 @@ services:
 
     env_file:
       - .env
-volumes:
-  letsencrypt:
+
+networks:
+  portfolio_default:
+    external: true
