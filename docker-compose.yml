@@ -45,7 +45,7 @@ services:
       - "traefik.http.routers.error-narrator-http.tls=false"
 
       # Apply middlewares to HTTPS router
-      - "traefik.http.routers.error-narrator.middlewares=cache-control"
+      # - "traefik.http.routers.error-narrator.middlewares=cache-control"
 
       # Rate limiting (protection against bots)
       - "traefik.http.middlewares.rate-limit.ratelimit.average=100"
