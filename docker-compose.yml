@@ -1,23 +1,23 @@
 services:
-  watchtower:
-    image: nickfedor/watchtower
-    restart: unless-stopped
-    command:
-      - "--label-enable"
-      - "--rolling-restart"
-      - "--include-restarting"
-      - "--stop-timeout"
-      - "60s"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - "com.centurylinklabs.watchtower.enable=false"
-    environment:
-      - WATCHTOWER_POLL_INTERVAL=300
-      - REPO_USER=mikewon98
-      - REPO_PASS=${GITHUB_TOKEN}
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - WATCHTOWER_NOTIFICATION_URL=${DISCORD_WEBHOOK_URL}
+  # watchtower:
+  #   image: nickfedor/watchtower
+  #   restart: unless-stopped
+  #   command:
+  #     - "--label-enable"
+  #     - "--rolling-restart"
+  #     - "--include-restarting"
+  #     - "--stop-timeout"
+  #     - "60s"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   labels:
+  #     - "com.centurylinklabs.watchtower.enable=false"
+  #   environment:
+  #     - WATCHTOWER_POLL_INTERVAL=300
+  #     - REPO_USER=mikewon98
+  #     - REPO_PASS=${GITHUB_TOKEN}
+  #     - WATCHTOWER_NOTIFICATIONS=shoutrrr
+  #     - WATCHTOWER_NOTIFICATION_URL=${DISCORD_WEBHOOK_URL}
   error-narrator:
     image: ghcr.io/mikewon98/error-narrator:stable
     restart: unless-stopped
