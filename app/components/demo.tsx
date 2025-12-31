@@ -14,6 +14,9 @@ const SAMPLE_ERRORS = [
   "Error: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside useEffect.",
 ];
 
+const errorMessage =
+  "I couldn't reach the AI analysis service right now, but check your console for details.";
+
 export const Demo = () => {
   const narrator = new ErrorNarrator({
     debug: false,
@@ -41,7 +44,11 @@ export const Demo = () => {
     setAnalysis(result);
     setIsAnalyzing(false);
 
-    narrator.test(`Analysis: ${result}`);
+    if (result == errorMessage) {
+      narrator.disable();
+    } else {
+      narrator.test(`Analysis: ${result}`);
+    }
   };
 
   return (
