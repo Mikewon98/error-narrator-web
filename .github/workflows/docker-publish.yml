@@ -31,7 +31,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/mikewon98/error-narrator
+          images: ghcr.io/mikewon98/error-narrator-web
           tags: |
             type=ref,event=branch
             type=ref,event=pr
