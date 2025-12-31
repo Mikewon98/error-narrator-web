@@ -32,20 +32,16 @@ services:
       - "traefik.http.routers.error-narrator.tls.certresolver=myresolver"
 
       # HTTP redirect router
-      - "traefik.http.routers.error-narrator-http.middlewares=redirect-to-https"
       - "traefik.http.routers.error-narrator-http.rule=Host(`errornarrator.michaelyze.com`)"
+      - "traefik.http.routers.error-narrator-http.middlewares=redirect-to-https-en"
       - "traefik.http.routers.error-narrator-http.entrypoints=web"
 
       # Service configuration
       - "traefik.http.services.error-narrator.loadbalancer.server.port=3000"
 
       # Middlewares
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
-      - "traefik.http.routers.error-narrator-http.tls=false"
-
-      # Apply middlewares to HTTPS router
-      # - "traefik.http.routers.error-narrator.middlewares=cache-control"
+      - "traefik.http.middlewares.redirect-to-https-en.redirectscheme.permanent=true"
+      - "traefik.http.middlewares.redirect-to-https-en.redirectscheme.scheme=https"
 
       # Rate limiting (protection against bots)
       - "traefik.http.middlewares.rate-limit.ratelimit.average=100"
