@@ -15,7 +15,7 @@ export const Installation = () => {
   };
 
   const codeString = `import { ErrorNarratorProvider } from "error-narrator";
-
+// inside your page use the useErrorNarrator(); hook to trigger errors
 function App() {
   return (
     <ErrorNarratorProvider options={{ enabled: true }}>
@@ -102,6 +102,12 @@ function App() {
                   <span className="text-white">ErrorNarratorProvider</span>{" "}
                   {"}"} <span className="text-gray-500">from</span>{" "}
                   <span className="text-gray-400">'error-narrator'</span>;
+                  {"\n\n"}
+                  <span>
+                    // inside your page use the{" "}
+                    <span className="text-white">useErrorNarrator();</span> hook
+                    to trigger errors
+                  </span>
                   {"\n\n"}
                   <span className="text-gray-500">function</span>{" "}
                   <span className="text-white">App</span>() {"{"}

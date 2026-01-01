@@ -3,38 +3,36 @@
 import { BrainIcon, SpeakerIcon, ZapIcon } from "./icons";
 import { analyzeError } from "../services/geminiService";
 import { motion, AnimatePresence } from "framer-motion";
-import ErrorNarrator from "error-narrator";
+import { useErrorNarrator } from "error-narrator";
 import { Section } from "../types/types";
 import { useState } from "react";
 
 const SAMPLE_ERRORS = [
-  "ReferenceError: 'user' is not defined in UserProfile.tsx line 42",
-  "TypeError: Cannot read properties of undefined (reading 'map') in TodoList.tsx",
-  "SyntaxError: Unexpected token '<' in JSON at position 0 from API response",
-  "Error: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside useEffect.",
+  "Module not found: ./nonexistent",
+  "Cannot read properties of undefined (reading 'map') in TodoList.tsx",
+  "Unexpected token '<' in JSON at position 0 from API response",
+  "Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside useEffect.",
 ];
 
 const errorMessage =
   "I couldn't reach the AI analysis service right now, but check your console for details.";
 
 export const Demo = () => {
-  const narrator = new ErrorNarrator({
-    debug: false,
-    voice: "Google US English",
-    rate: 1.1,
-  });
+  const { handleError, test, disable, enable } = useErrorNarrator();
 
   const [currentError, setCurrentError] = useState<string | null>(null);
-  const [isSpeaking, setIsSpeaking] = useState(false);
   const [analysis, setAnalysis] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const triggerError = (errorMsg: string) => {
-    narrator.test(errorMsg);
-    // Stop any current speech
+  const triggerError = (errorMsg: string, error: Error) => {
+    try {
+      setCurrentError(errorMsg);
+      setAnalysis(null); // Reset previous analysis
 
-    setCurrentError(errorMsg);
-    setAnalysis(null); // Reset previous analysis
+      throw error;
+    } catch (error: any) {
+      handleError(error as Error);
+    }
   };
 
   const handleAnalyze = async () => {
@@ -45,9 +43,10 @@ export const Demo = () => {
     setIsAnalyzing(false);
 
     if (result == errorMessage) {
-      narrator.disable();
+      disable();
     } else {
-      narrator.test(`Analysis: ${result}`);
+      enable();
+      test(`Analysis: ${result}`);
     }
   };
 
@@ -75,7 +74,7 @@ export const Demo = () => {
             {SAMPLE_ERRORS.map((err, idx) => (
               <button
                 key={idx}
-                onClick={() => triggerError(err)}
+                onClick={() => triggerError(err, new Error(err))}
                 className="px-4 py-3 border-2 border-black hover:bg-black hover:text-white transition-all font-mono text-sm text-left shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
               >
                 Trigger Error {idx + 1}

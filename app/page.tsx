@@ -1,4 +1,7 @@
+"use client";
+
 import { Installation } from "./components/installation";
+import { ErrorNarratorProvider } from "error-narrator";
 import { Footer } from "./components/footer";
 import { Demo } from "./components/demo";
 import { Hero } from "./components/hero";
@@ -69,7 +72,11 @@ export default function Home() {
         </nav>
 
         <Hero />
-        <Demo />
+        <ErrorNarratorProvider
+          options={{ rate: 1.1, debug: true, voice: "Google US English" }}
+        >
+          <Demo />
+        </ErrorNarratorProvider>
         <Installation />
         <Footer />
       </main>
