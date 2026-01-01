@@ -25,7 +25,7 @@ export default function Home() {
     },
     description:
       "Audio-first JavaScript debugging tool that narrates errors in real-time with AI-powered explanations.",
-    softwareVersion: "2.0.0",
+    softwareVersion: "2.0.1",
     datePublished: "2024",
     author: {
       "@type": "Organization",
@@ -66,7 +66,7 @@ export default function Home() {
               rel="noopener noreferrer"
               className="hidden sm:block pointer-events-auto text-sm font-mono hover:underline text-white"
             >
-              v2.0.0
+              v2.0.1
             </a>
           </div>
         </nav>

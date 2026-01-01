@@ -29,7 +29,7 @@ export const Hero = () => {
         >
           <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
           <span className="text-sm font-mono text-gray-300">
-            v2.0.0 Now Available
+            v2.0.1 Now Available
           </span>
         </motion.div>
 
