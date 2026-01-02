@@ -20,7 +20,7 @@ services:
       - WATCHTOWER_NOTIFICATIONS=shoutrrr
       - WATCHTOWER_NOTIFICATION_URL=${DISCORD_WEBHOOK_URL}
   error-narrator:
-    image: ghcr.io/mikewon98/error-narrator:stable
+    image: ghcr.io/mikewon98/error-narrator-web:stable
     restart: unless-stopped
     networks:
       - portfolio_default
