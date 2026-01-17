@@ -36,7 +36,6 @@ export const Demo = () => {
   };
 
   const handleAnalyze = async () => {
-    enable();
     if (!currentError) return;
     setIsAnalyzing(true);
     const result = await analyzeError(currentError);
