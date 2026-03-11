@@ -1,0 +1,36 @@
+# robots.txt for SpeedMind — Triple Your Reading Speed
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Disallow crawling of specific file types (optional)
+# Disallow: /*.pdf$
+# Disallow: /*.json$
+
+# Sitemap location (update with your actual domain)
+Sitemap: https://errornarrator.michaelyze.com/sitemap.xml
+
+# Specific rules for different search engines (optional)
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Prevent AI crawlers from training on your content (optional)
+# Uncomment these if you want to block AI training bots
+# User-agent: GPTBot
+# Disallow: /
+
+# User-agent: CCBot
+# Disallow: /
+
+# User-agent: anthropic-ai
+# Disallow: /
+
+# User-agent: Claude-Web
+# Disallow: /
